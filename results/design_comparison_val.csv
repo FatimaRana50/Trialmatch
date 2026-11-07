@@ -1,0 +1,4 @@
+model,acc,macroF1,incl_acc,excl_acc,evid_micro_F1,evid_macro_F1,F1[excluded],F1[included],F1[not applicable],F1[not enough information],F1[not excluded],F1[not included]
+base,0.214,0.171,0.439,0.107,0.195,0.204,0.154,0.651,0.147,0.0,0.075,0.0
+lora,0.694,0.326,0.636,0.721,0.57,0.575,0.0,0.6,0.0,0.519,0.838,0.0
+lora_os,0.704,0.336,0.652,0.729,0.5,0.436,0.0,0.655,0.0,0.52,0.842,0.0
