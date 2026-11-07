@@ -8,6 +8,7 @@ import argparse
 import json
 import os
 import sys
+from collections import Counter
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import torch
@@ -47,6 +48,17 @@ class Collator:
                 "attention_mask": torch.tensor(mask)}
 
 
+def oversample(rows, target, max_repeat):
+    """Repeat every row of a rare label round(target / count) times (capped), deterministically.
+    Only the training split is passed in; val is untouched."""
+    counts = Counter(r["expert_eligibility"] for r in rows)
+    factor = {l: max(1, min(max_repeat, round(target / c))) for l, c in counts.items()}
+    out = [r for r in rows for _ in range(factor[r["expert_eligibility"]])]
+    print("oversampling factors:", factor)
+    print("label counts after:", dict(Counter(r["expert_eligibility"] for r in out)))
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default=infer.BASE_MODEL)
@@ -62,7 +74,12 @@ def main():
     ap.add_argument("--eval-steps", type=int, default=10)
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--fp32", action="store_true", help="load base in fp32 (use if fp16 loss becomes NaN)")
+    ap.add_argument("--oversample", type=int, default=0,
+                    help="repeat rare-label training rows until each label has about this many (0 = off)")
+    ap.add_argument("--max-repeat", type=int, default=6, help="cap on how often one row is repeated")
+    ap.add_argument("--tag", default="", help="suffix for log/plot file names, e.g. os")
     args = ap.parse_args()
+    sfx = f"_{args.tag}" if args.tag else ""
     set_seed(args.seed)
 
     rows = data.load_rows()
@@ -70,6 +87,8 @@ def main():
     data.check_split(manifest, rows)
     train_rows = data.rows_for(rows, manifest, "train")
     val_rows = data.rows_for(rows, manifest, "val")
+    if args.oversample:
+        train_rows = oversample(train_rows, args.oversample, args.max_repeat)
 
     tok = AutoTokenizer.from_pretrained(args.base)
     train_ds = [encode(tok, r, args.max_len) for r in train_rows]
@@ -108,15 +127,15 @@ def main():
     print("best checkpoint:", trainer.state.best_model_checkpoint, "->", final)
 
     os.makedirs(os.path.join(ROOT, "logs"), exist_ok=True)
-    json.dump(trainer.state.log_history, open(os.path.join(ROOT, "logs", "train_log.json"), "w"), indent=2)
+    json.dump(trainer.state.log_history, open(os.path.join(ROOT, "logs", f"train_log{sfx}.json"), "w"), indent=2)
     json.dump({**vars(args), "best_checkpoint": trainer.state.best_model_checkpoint,
                "best_val_loss": trainer.state.best_metric,
                "train_examples": len(train_ds), "val_examples": len(val_ds),
                "max_train_tokens": max(lens),
                "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",
                "peak_mem_gb": round(torch.cuda.max_memory_allocated() / 1e9, 2) if torch.cuda.is_available() else None},
-              open(os.path.join(ROOT, "logs", "train_config.json"), "w"), indent=2)
-    plot_curves(trainer.state.log_history, os.path.join(ROOT, "results", "training_curves.png"))
+              open(os.path.join(ROOT, "logs", f"train_config{sfx}.json"), "w"), indent=2)
+    plot_curves(trainer.state.log_history, os.path.join(ROOT, "results", f"training_curves{sfx}.png"))
 
 
 def plot_curves(history, path):
