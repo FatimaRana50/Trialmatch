@@ -1,0 +1,3 @@
+model,acc,macroF1,incl_acc,excl_acc,evid_micro_F1,evid_macro_F1,valid_json,invalid
+base,0.214,0.171,0.439,0.107,0.195,0.204,1.0,0
+lora,0.694,0.326,0.636,0.721,0.57,0.575,1.0,0
