@@ -78,7 +78,7 @@ def main():
     print(f"train={len(train_ds)} val={len(val_ds)} tokens: max={max(lens)} mean={sum(lens)/len(lens):.0f}")
 
     dtype = torch.float32 if args.fp32 else torch.float16
-    model = AutoModelForCausalLM.from_pretrained(args.base, torch_dtype=dtype, attn_implementation="sdpa")
+    model = AutoModelForCausalLM.from_pretrained(args.base, dtype=dtype, attn_implementation="sdpa")
     model.config.use_cache = False
     model.enable_input_require_grads()  # needed for gradient checkpointing with a frozen base
     lora = LoraConfig(r=args.r, lora_alpha=args.alpha, lora_dropout=args.dropout, bias="none",

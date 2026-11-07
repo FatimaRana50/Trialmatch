@@ -14,7 +14,7 @@ def load_model(base=BASE_MODEL, adapter=None, dtype=torch.float16, device=None):
         dtype = torch.float32
     tok = AutoTokenizer.from_pretrained(base)
     tok.padding_side = "left"  # left-pad so every prompt ends right before generation
-    model = AutoModelForCausalLM.from_pretrained(base, torch_dtype=dtype, attn_implementation="sdpa")
+    model = AutoModelForCausalLM.from_pretrained(base, dtype=dtype, attn_implementation="sdpa")
     if adapter:
         from peft import PeftModel
         model = PeftModel.from_pretrained(model, adapter).merge_and_unload()
