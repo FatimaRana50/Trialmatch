@@ -1,0 +1,17 @@
+{
+  "prompt_tokens": {
+    "min": 267,
+    "mean": 353.8836291913215,
+    "p95": 497.0,
+    "max": 636
+  },
+  "target_tokens": {
+    "min": 13,
+    "mean": 15.604536489151874,
+    "max": 39
+  },
+  "max_len_used": 1536,
+  "examples_over_max_len": 0,
+  "note_sentences_max": 14,
+  "qwen_context_window": 32768
+}
