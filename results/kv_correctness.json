@@ -1,0 +1,296 @@
+{
+  "env": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "adapter": null,
+    "dtype": "torch.float16",
+    "attention": "sdpa",
+    "device": "Tesla T4",
+    "torch": "2.14.1+cu130",
+    "decoding": "greedy (argmax), batch 1",
+    "kv_bytes_per_token": 28672
+  },
+  "passed": 29,
+  "total": 30,
+  "checks": [
+    {
+      "input_len": 128,
+      "output_len": 32,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 32,
+      "n_other": 32,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 128,
+      "output_len": 32,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 32,
+      "n_other": 32,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 128,
+      "output_len": 128,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 128,
+      "n_other": 128,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 128,
+      "output_len": 128,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 128,
+      "n_other": 128,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 128,
+      "output_len": 256,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 256,
+      "n_other": 256,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 128,
+      "output_len": 256,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 256,
+      "n_other": 256,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 512,
+      "output_len": 32,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 32,
+      "n_other": 32,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 512,
+      "output_len": 32,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 32,
+      "n_other": 32,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 512,
+      "output_len": 128,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 128,
+      "n_other": 128,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 512,
+      "output_len": 128,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 128,
+      "n_other": 128,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 512,
+      "output_len": 256,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 256,
+      "n_other": 256,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 512,
+      "output_len": 256,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 256,
+      "n_other": 256,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 1024,
+      "output_len": 32,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 32,
+      "n_other": 32,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 1024,
+      "output_len": 32,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 32,
+      "n_other": 32,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 1024,
+      "output_len": 128,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 128,
+      "n_other": 128,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 1024,
+      "output_len": 128,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 128,
+      "n_other": 128,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 1024,
+      "output_len": 256,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 256,
+      "n_other": 256,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 1024,
+      "output_len": 256,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 256,
+      "n_other": 256,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 383,
+      "output_len": "eos<=64",
+      "annotation_id": 0,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 17,
+      "n_other": 17,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 383,
+      "output_len": "eos<=64",
+      "annotation_id": 0,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 17,
+      "n_other": 17,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 362,
+      "output_len": "eos<=64",
+      "annotation_id": 1,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 17,
+      "n_other": 17,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 362,
+      "output_len": "eos<=64",
+      "annotation_id": 1,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 17,
+      "n_other": 17,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 368,
+      "output_len": "eos<=64",
+      "annotation_id": 2,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 17,
+      "n_other": 17,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 368,
+      "output_len": "eos<=64",
+      "annotation_id": 2,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 17,
+      "n_other": 17,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 383,
+      "output_len": "eos<=64",
+      "annotation_id": 3,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 39,
+      "n_other": 39,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 383,
+      "output_len": "eos<=64",
+      "annotation_id": 3,
+      "pair": "cached_vs_hf_generate",
+      "equal": true,
+      "n_ref": 39,
+      "n_other": 39,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 369,
+      "output_len": "eos<=64",
+      "annotation_id": 4,
+      "pair": "cached_vs_nocache",
+      "equal": true,
+      "n_ref": 39,
+      "n_other": 39,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 369,
+      "output_len": "eos<=64",
+      "annotation_id": 4,
+      "pair": "cached_vs_hf_generate",
+      "equal": false,
+      "n_ref": 24,
+      "n_other": 39,
+      "first_mismatch": 8
+    },
+    {
+      "input_len": 383,
+      "output_len": "eos<=48",
+      "pair": "attn_reference_vs_sdpa",
+      "equal": true,
+      "n_ref": 17,
+      "n_other": 17,
+      "first_mismatch": null
+    },
+    {
+      "input_len": 383,
+      "output_len": "eos<=48",
+      "pair": "attn_tiled_vs_sdpa",
+      "equal": true,
+      "n_ref": 17,
+      "n_other": 17,
+      "first_mismatch": null
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "env": {
+    "device": "Tesla T4",
+    "torch": "2.14.1+cu130"
+  },
+  "rows": [
+    {
+      "seq_len": 256,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "reference (PyTorch, full matrix)",
+      "ms": 0.5943780000166043,
+      "peak_mem_mb": 9.01171875
+    },
+    {
+      "seq_len": 256,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "tiled online-softmax (PyTorch)",
+      "ms": 2.431599000033202,
+      "peak_mem_mb": 6.78125
+    },
+    {
+      "seq_len": 256,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: math backend",
+      "ms": 0.538486000039029,
+      "peak_mem_mb": 13.00341796875
+    },
+    {
+      "seq_len": 256,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: memory-efficient backend",
+      "ms": 0.09329150003622999,
+      "peak_mem_mb": 0.7509765625
+    },
+    {
+      "seq_len": 256,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: flash backend",
+      "error": "No available kernel. Aborting execution."
+    },
+    {
+      "seq_len": 512,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "reference (PyTorch, full matrix)",
+      "ms": 1.3492279999809398,
+      "peak_mem_mb": 36.0234375
+    },
+    {
+      "seq_len": 512,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "tiled online-softmax (PyTorch)",
+      "ms": 7.570259499971144,
+      "peak_mem_mb": 8.28125
+    },
+    {
+      "seq_len": 512,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: math backend",
+      "ms": 1.259245499966255,
+      "peak_mem_mb": 40.00634765625
+    },
+    {
+      "seq_len": 512,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: memory-efficient backend",
+      "ms": 0.17894149999619913,
+      "peak_mem_mb": 1.5009765625
+    },
+    {
+      "seq_len": 512,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: flash backend",
+      "error": "No available kernel. Aborting execution."
+    },
+    {
+      "seq_len": 1024,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "reference (PyTorch, full matrix)",
+      "ms": 4.649132999986705,
+      "peak_mem_mb": 144.046875
+    },
+    {
+      "seq_len": 1024,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "tiled online-softmax (PyTorch)",
+      "ms": 29.403493000074832,
+      "peak_mem_mb": 12.025390625
+    },
+    {
+      "seq_len": 1024,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: math backend",
+      "ms": 3.6789035000310832,
+      "peak_mem_mb": 136.51220703125
+    },
+    {
+      "seq_len": 1024,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: memory-efficient backend",
+      "ms": 0.3346294999460042,
+      "peak_mem_mb": 3.0009765625
+    },
+    {
+      "seq_len": 1024,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: flash backend",
+      "error": "No available kernel. Aborting execution."
+    },
+    {
+      "seq_len": 2048,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "reference (PyTorch, full matrix)",
+      "ms": 17.013599999984308,
+      "peak_mem_mb": 576.09375
+    },
+    {
+      "seq_len": 2048,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "tiled online-softmax (PyTorch)",
+      "ms": 99.3693639999833,
+      "peak_mem_mb": 21.025390625
+    },
+    {
+      "seq_len": 2048,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: math backend",
+      "ms": 14.247395500035509,
+      "peak_mem_mb": 496.02392578125
+    },
+    {
+      "seq_len": 2048,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: memory-efficient backend",
+      "ms": 1.1954625000498709,
+      "peak_mem_mb": 6.0009765625
+    },
+    {
+      "seq_len": 2048,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: flash backend",
+      "error": "No available kernel. Aborting execution."
+    },
+    {
+      "seq_len": 4096,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "reference (PyTorch, full matrix)",
+      "ms": 67.13550650005118,
+      "peak_mem_mb": 2304.1875
+    },
+    {
+      "seq_len": 4096,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "tiled online-softmax (PyTorch)",
+      "ms": 298.4041440000169,
+      "peak_mem_mb": 39.025390625
+    },
+    {
+      "seq_len": 4096,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: math backend",
+      "ms": 56.108664499959104,
+      "peak_mem_mb": 1888.04736328125
+    },
+    {
+      "seq_len": 4096,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: memory-efficient backend",
+      "ms": 4.331179000018892,
+      "peak_mem_mb": 12.0009765625
+    },
+    {
+      "seq_len": 4096,
+      "heads": 12,
+      "head_dim": 128,
+      "dtype": "float16",
+      "impl": "sdpa: flash backend",
+      "error": "No available kernel. Aborting execution."
+    }
+  ]
+}
