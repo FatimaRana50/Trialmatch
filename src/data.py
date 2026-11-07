@@ -77,10 +77,22 @@ def clean_row(r):
     return out
 
 
+def is_usable(r):
+    """Annotation 883 has criterion_text=None; with no criterion there is nothing to judge."""
+    return bool((r["criterion_text"] or "").strip()) and bool((r["note"] or "").strip())
+
+
 def load_rows():
+    """Returns cleaned usable rows. Unusable annotation IDs are stored in DROPPED."""
     from datasets import load_dataset
     ds = load_dataset(DATASET, split="train")
-    return [clean_row(r) for r in ds]
+    DROPPED[:] = [r["annotation_id"] for r in ds if not is_usable(r)]
+    if DROPPED:
+        print(f"dropped {len(DROPPED)} annotation(s) with empty criterion/note: {DROPPED}")
+    return [clean_row(r) for r in ds if is_usable(r)]
+
+
+DROPPED = []
 
 
 def make_split(rows):
@@ -116,6 +128,7 @@ def build_manifest(rows):
         "procedure": "sorted unique patient_id -> np.random.default_rng(42).shuffle -> first 37 train, next 8 val, last 8 test",
         "seed": SEED,
         **split,
+        "dropped_annotations": {"ids": list(DROPPED), "reason": "empty criterion_text"},
         "counts": {},
     }
     for k in ("train", "val", "test"):

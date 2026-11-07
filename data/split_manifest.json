@@ -61,21 +61,27 @@
     "sigir-201421",
     "sigir-201417"
   ],
+  "dropped_annotations": {
+    "ids": [
+      883
+    ],
+    "reason": "empty criterion_text"
+  },
   "counts": {
     "train": {
       "patients": 37,
-      "annotations": 603,
+      "annotations": 602,
       "inclusion": 215,
-      "exclusion": 388,
+      "exclusion": 387,
       "labels": {
         "included": 88,
         "not included": 13,
         "excluded": 8,
-        "not excluded": 292,
+        "not excluded": 291,
         "not enough information": 174,
         "not applicable": 28
       },
-      "empty_evidence": 349,
+      "empty_evidence": 348,
       "annotation_ids": [
         43,
         44,
@@ -577,7 +583,6 @@
         880,
         881,
         882,
-        883,
         884,
         885,
         886,
