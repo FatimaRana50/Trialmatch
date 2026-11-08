@@ -30,12 +30,13 @@ DRAFT_ADAPTER = os.environ.get("TRIALMATCH_DRAFT_ADAPTER", "f777777777/trialmatc
 MODES = {
     "KV cache (manual decoder)": "kv_cache",
     "Speculative (0.5B draft + 1.5B target)": "speculative",
-    "Hugging Face generate (library reference)": "hf_generate",
+    "Hugging Face generate, batched (library reference)": "hf_generate",
     "No cache (slow reference)": "no_cache",
 }
 MAX_NOTE_TOKENS = 2000
 MAX_CRITERIA = 40
 MAX_NEW_TOKENS = 64
+HF_BATCH = 8
 DISCLAIMER = ("Educational screening prototype only. It is NOT a clinical enrollment decision and must not be "
               "used for patient care. All outputs must be reviewed by qualified clinical research staff.")
 
@@ -52,12 +53,25 @@ class Models:
         self.tok = self.target_hf = self.target = None
         self.draft_hf = self.draft = None
         self.draft_name = None
+        self.status = "Model not loaded yet."
+        self.ready = False
 
     def load_target(self):
         with self.lock:
             if self.target is None:
-                self.tok, self.target_hf = infer.load_model(TARGET_BASE, TARGET_ADAPTER or None)
+                self.status = (f"Loading {TARGET_BASE} + fine-tuned adapter... "
+                               "(the first start downloads about 3 GB; this can take several minutes)")
+                try:
+                    self.tok, self.target_hf = infer.load_model(TARGET_BASE, TARGET_ADAPTER or None)
+                except Exception as e:
+                    self.status = f"Model failed to load: {type(e).__name__}: {e}"
+                    raise
                 self.target = ManualQwen2(self.target_hf)
+                dev = self.target_hf.device
+                where = torch.cuda.get_device_name(0) if dev.type == "cuda" else "CPU"
+                self.status = (f"Ready: {TARGET_BASE.split('/')[-1]} + LoRA on {where} "
+                               f"({str(self.target.dtype).replace('torch.', '')})")
+                self.ready = True
         return self.tok, self.target_hf, self.target
 
     def load_draft(self):
@@ -73,6 +87,15 @@ class Models:
                 assert tok_d.get_vocab() == self.tok.get_vocab(), "draft tokenizer differs from target"
                 self.draft = ManualQwen2(self.draft_hf)
         return self.draft
+
+    def preload(self):
+        """Start loading the target in the background so the page opens immediately."""
+        def run():
+            try:
+                self.load_target()
+            except Exception:
+                pass                                  # status already holds the error
+        threading.Thread(target=run, daemon=True).start()
 
     def device(self):
         return self.target_hf.device if self.target_hf is not None else None
@@ -219,21 +242,63 @@ def explain(label, evidence, sents, ctype):
             "unsupported and should be checked manually.")
 
 
-def screen(note, criteria_text, mode_label, k=4, progress=None):
+def screen(note, criteria_text, mode_label, k=4, reuse_prefix=True, progress=None):
+    if progress and not MODELS.ready:
+        progress(0, desc="Loading the model (first start downloads about 3 GB)...")
     sents, crits = validate(note, criteria_text)
     mode = MODES[mode_label]
-    tok, hf, _ = MODELS.load_target()
+    tok, hf, target = MODELS.load_target()
     valid_ids = [i for i, _ in sents]
+    eos = [tok.convert_tokens_to_ids("<|im_end|>"), tok.eos_token_id]
+    prompts = []
+    for c in crits:
+        text = tok.apply_chat_template(data.build_messages(sents, c["type"], c["text"]),
+                                       tokenize=False, add_generation_prompt=True)
+        prompts.append(tok(text, add_special_tokens=False)["input_ids"])
+
+    # Shared-prefix KV reuse: every prompt starts with the same system prompt + patient note,
+    # so that prefix is prefilled once and each criterion only prefills its own suffix.
+    prefix_len, cache = 0, None
+    if mode == "kv_cache" and reuse_prefix and len(prompts) > 1:
+        lcp = min(len(p) for p in prompts) - 1
+        for p in prompts[1:]:
+            lcp = min(lcp, next((i for i, (a, b) in enumerate(zip(prompts[0], p)) if a != b), lcp))
+        if lcp > 0:
+            prefix_len = lcp
+            cache = target.new_cache(max(len(p) for p in prompts) + MAX_NEW_TOKENS)
+            if progress:
+                progress(0, desc="Encoding the patient note once (shared prefix)...")
+            target.forward(torch.tensor([prompts[0][:prefix_len]], device=hf.device), cache)
+
+    # HF-generate mode screens all criteria as left-padded batches (much cheaper per criterion on CPU)
+    batched = {}
+    if mode == "hf_generate":
+        for start in range(0, len(crits), HF_BATCH):
+            if progress:
+                progress((start, len(crits)), desc=f"Criteria {start + 1}-{min(start + HF_BATCH, len(crits))} "
+                                                   f"of {len(crits)} (batched)")
+            t0 = time.perf_counter()
+            chunk = crits[start:start + HF_BATCH]
+            texts = infer.generate_batch(tok, hf, [data.build_messages(sents, c["type"], c["text"]) for c in chunk],
+                                         MAX_NEW_TOKENS)
+            dt = (time.perf_counter() - t0) / len(chunk)
+            for i, t in enumerate(texts):
+                batched[start + i] = {"text": t, "n_new": len(tok(t, add_special_tokens=False)["input_ids"]),
+                                      "total_s": dt}
+
     results = []
     t_start = time.perf_counter()
-    for n, c in enumerate(crits):
-        if progress:
-            progress((n, len(crits)), desc=f"Criterion {n + 1}/{len(crits)}")
-        msgs = data.build_messages(sents, c["type"], c["text"])
-        text = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-        ids = torch.tensor([tok(text, add_special_tokens=False)["input_ids"]], device=hf.device)
-        r = _decode(mode, ids, k)
-        raw = tok.decode(r["tokens"], skip_special_tokens=True)
+    for n, (c, p_ids) in enumerate(zip(crits, prompts)):
+        if progress and n not in batched:
+            progress((n, len(crits)), desc=f"Criterion {n + 1} of {len(crits)}")
+        ids = torch.tensor([p_ids], device=hf.device)
+        if n in batched:
+            r = batched[n]
+        elif cache is not None:
+            r = greedy_cached(target, ids, MAX_NEW_TOKENS, eos, cache=cache, prefix_len=prefix_len)
+        else:
+            r = _decode(mode, ids, k)
+        raw = r["text"] if "text" in r else tok.decode(r["tokens"], skip_special_tokens=True)
         p = data.parse_output(raw, c["type"], valid_ids)
         results.append({
             "criterion_type": c["type"], "criterion": c["text"],
@@ -241,11 +306,14 @@ def screen(note, criteria_text, mode_label, k=4, progress=None):
             "evidence_text": [dict(sents)[i] for i in p["evidence"]],
             "explanation": explain(p["label"], p["evidence"], sents, c["type"]),
             "valid_json": p["valid_json"], "raw_output": raw,
-            "prompt_tokens": ids.shape[1], "new_tokens": r["n_new"], "seconds": round(r["total_s"], 3),
+            "prompt_tokens": ids.shape[1], "prefill_tokens": ids.shape[1] - prefix_len,
+            "new_tokens": r["n_new"], "seconds": round(r["total_s"], 3),
             "acceptance_rate": r.get("acceptance_rate"),
         })
-    return {"sentences": sents, "results": results, "overall": aggregate(results),
-            "provenance": provenance(note, criteria_text, mode_label, k, time.perf_counter() - t_start)}
+    prov = provenance(note, criteria_text, mode_label, k, time.perf_counter() - t_start)
+    prov["shared_prefix_tokens_reused"] = prefix_len
+    prov["batched"] = HF_BATCH if mode == "hf_generate" else 1
+    return {"sentences": sents, "results": results, "overall": aggregate(results), "provenance": prov}
 
 
 def aggregate(results):

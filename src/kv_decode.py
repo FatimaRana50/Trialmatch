@@ -46,12 +46,18 @@ def _result(tokens, gaps, t0, t1, t2, peak, extra=None):
 
 
 @torch.no_grad()
-def greedy_cached(mm: ManualQwen2, input_ids, max_new, eos_ids=(), stop_at_eos=True):
+def greedy_cached(mm: ManualQwen2, input_ids, max_new, eos_ids=(), stop_at_eos=True, cache=None, prefix_len=0):
+    """With `cache` and `prefix_len`, the first prefix_len tokens of input_ids are already in the
+    cache (e.g. the system prompt + patient note shared by every criterion): the cache is cropped
+    back to that prefix and only the remaining tokens are prefilled."""
     dev = input_ids.device
     base = mem_reset(dev)
     sync(dev); t0 = time.perf_counter()
-    cache = mm.new_cache(input_ids.shape[1] + max_new)
-    logits = mm.forward(input_ids, cache)[:, -1]          # prefill: whole prompt in one pass
+    if cache is None:
+        cache, prefix_len = mm.new_cache(input_ids.shape[1] + max_new), 0
+    else:
+        cache.crop(prefix_len)
+    logits = mm.forward(input_ids[:, prefix_len:], cache)[:, -1]   # prefill (only the new part)
     nxt = logits.argmax(-1)
     tokens, gaps = [int(nxt)], [_top2_gap(logits)]
     sync(dev); t1 = time.perf_counter()
@@ -61,7 +67,8 @@ def greedy_cached(mm: ManualQwen2, input_ids, max_new, eos_ids=(), stop_at_eos=T
         tokens.append(int(nxt)); gaps.append(_top2_gap(logits))
     sync(dev); t2 = time.perf_counter()
     return _result(tokens, gaps, t0, t1, t2, mem_peak(dev, base),
-                   {"cache_mb": cache.nbytes() / 2**20, "cache_len": cache.length})
+                   {"cache_mb": cache.nbytes() / 2**20, "cache_len": cache.length,
+                    "prefix_reused": prefix_len})
 
 
 @torch.no_grad()
