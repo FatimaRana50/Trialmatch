@@ -1,0 +1,330 @@
+{
+ "source": "ncbi/TrialGPT-Criterion-Annotations, validation split (expert labels shown for comparison only)",
+ "examples": [
+  {
+   "name": "sigir-20142 \u00d7 NCT02618655",
+   "patient_id": "sigir-20142",
+   "trial_id": "NCT02618655",
+   "trial_title": "Clinical Research for the Diagnosis of Tick-borne Diseases in Patients With Unexplained Acute Fever",
+   "note": "0. An 8-year-old male presents in March to the ER with fever up to 39 C, dyspnea and cough for 2 days.\n1. He has just returned from a 5 day vacation in Colorado.\n2. Parents report that prior to the onset of fever and cough, he had loose stools.\n3. He denies upper respiratory tract symptoms.\n4. On examination he is in respiratory distress and has bronchial respiratory sounds on the left.\n5. A chest x-ray shows bilateral lung infiltrates.\n6. The patient will provide informed consent, and will comply with the trial protocol without any practical issues.",
+   "criteria": [
+    {
+     "type": "inclusion",
+     "text": "patients have fever more than one week",
+     "expert_label": "not included",
+     "expert_evidence": [
+      0
+     ]
+    },
+    {
+     "type": "inclusion",
+     "text": "temperature is higher than 38\u2103 Celsius degree",
+     "expert_label": "included",
+     "expert_evidence": [
+      0
+     ]
+    },
+    {
+     "type": "inclusion",
+     "text": "full of physical examination and laboratory examination have been carried out after one week\uff0cbut still cannot make a definite diagnosis",
+     "expert_label": "not applicable",
+     "expert_evidence": []
+    },
+    {
+     "type": "exclusion",
+     "text": "fever for non-infectious diseases such as rheumatic autoimmune disease or with tumor",
+     "expert_label": "not excluded",
+     "expert_evidence": []
+    },
+    {
+     "type": "exclusion",
+     "text": "we find that the patient selected does not meet the selection criteria within the observation period",
+     "expert_label": "not enough information",
+     "expert_evidence": []
+    },
+    {
+     "type": "exclusion",
+     "text": "patients leave with automatic discharge",
+     "expert_label": "not enough information",
+     "expert_evidence": []
+    }
+   ]
+  },
+  {
+   "name": "sigir-20141 \u00d7 NCT00149227",
+   "patient_id": "sigir-20141",
+   "trial_id": "NCT00149227",
+   "trial_title": "Add-on Effects of Valsartan on Morbi- Mortality (KYOTO HEART Study)",
+   "note": "0. A 58-year-old African-American woman presents to the ER with episodic pressing/burning anterior chest pain that began two days earlier for the first time in her life.\n1. The pain started while she was walking, radiates to the back, and is accompanied by nausea, diaphoresis and mild dyspnea, but is not increased on inspiration.\n2. The latest episode of pain ended half an hour prior to her arrival.\n3. She is known to have hypertension and obesity.\n4. She denies smoking, diabetes, hypercholesterolemia, or a family history of heart disease.\n5. She currently takes no medications.\n6. Physical examination is normal.\n7. The EKG shows nonspecific changes.\n8. The patient will provide informed consent, and will comply with the trial protocol without any practical issues.",
+   "criteria": [
+    {
+     "type": "inclusion",
+     "text": "Clinical diagnosis of hypertension",
+     "expert_label": "included",
+     "expert_evidence": [
+      3
+     ]
+    },
+    {
+     "type": "inclusion",
+     "text": "Clinical diagnosis of one or more risk factors, such as diabetes, smoking habit, lipid metabolism abnormality, history of ischemic heart disease (IHD) or cerebrovascular disease, obesity (BMI>25), chronic heart failure (NYHA II-III), and electrocardiogram (ECG) abnormality (LVH)",
+     "expert_label": "included",
+     "expert_evidence": [
+      3,
+      4
+     ]
+    },
+    {
+     "type": "exclusion",
+     "text": "Patients who have already been administered ARB",
+     "expert_label": "not excluded",
+     "expert_evidence": [
+      5
+     ]
+    },
+    {
+     "type": "exclusion",
+     "text": "Patients with IHD within 6 months after percutaneous coronary intervention(PCI), and who are stable but are going to implement PCI or coronary artery bypass grafting(CABG)",
+     "expert_label": "not applicable",
+     "expert_evidence": []
+    },
+    {
+     "type": "exclusion",
+     "text": "Severe/malignant/secondary hypertensive patients",
+     "expert_label": "not excluded",
+     "expert_evidence": [
+      3
+     ]
+    },
+    {
+     "type": "exclusion",
+     "text": "Pregnant women and women of childbearing potential",
+     "expert_label": "not enough information",
+     "expert_evidence": [
+      0
+     ]
+    },
+    {
+     "type": "exclusion",
+     "text": "History of heart failure, unstable angina, myocardial infarction, PTCA, or CABG within the preceding 6 months",
+     "expert_label": "not excluded",
+     "expert_evidence": []
+    },
+    {
+     "type": "exclusion",
+     "text": "Arrhythmia needed to be treated or accompanied with symptoms, second or third degree AV block",
+     "expert_label": "not excluded",
+     "expert_evidence": []
+    },
+    {
+     "type": "exclusion",
+     "text": "Severe renal impairment (Serum creatinine >3.0 mg/dl)",
+     "expert_label": "not excluded",
+     "expert_evidence": []
+    },
+    {
+     "type": "exclusion",
+     "text": "Severe hepatic impairment (Hepatic failure, Cirrhosis, etc.)",
+     "expert_label": "not excluded",
+     "expert_evidence": []
+    }
+   ]
+  },
+  {
+   "name": "sigir-201515 \u00d7 NCT00932425",
+   "patient_id": "sigir-201515",
+   "trial_id": "NCT00932425",
+   "trial_title": "Long-term Cardiac Monitoring After Cryptogenic Stroke (CMACS)",
+   "note": "0. Karen is a 72-year-old woman with hypertension and type 2 diabetes, who was hospitalized for cryptogenic stroke two weeks ago.\n1. At the time, computed tomography was negative for brain hemorrhage and she was given thrombolytic therapy with resolution of her symptoms.\n2. Transesophageal echocardiogram and magnetic resonance angiogram of brain and great vessels found no evidence of abnormalities.\n3. She presents currently with a blood pressure of 120/70 mm Hg, normal glucose, and normal sinus rhythm on a 12-lead electrocardiogram.\n4. She reports history of occasional palpitations, shortness of breath and chest pain lasting for a few minutes and then stopping on their own.\n5. The patient will provide informed consent, and will comply with the trial protocol without any practical issues.",
+   "criteria": [
+    {
+     "type": "inclusion",
+     "text": "Age > 18 years",
+     "expert_label": "included",
+     "expert_evidence": [
+      0
+     ]
+    },
+    {
+     "type": "inclusion",
+     "text": "Seen at UCSF Medical Center for cryptogenic stroke or high-risk TIA",
+     "expert_label": "not enough information",
+     "expert_evidence": []
+    },
+    {
+     "type": "inclusion",
+     "text": "Onset of stroke or TIA symptoms within the previous 60 days",
+     "expert_label": "included",
+     "expert_evidence": [
+      0
+     ]
+    },
+    {
+     "type": "exclusion",
+     "text": "Definite small-vessel etiology by history or imaging",
+     "expert_label": "not applicable",
+     "expert_evidence": []
+    },
+    {
+     "type": "exclusion",
+     "text": "Source found on vascular imaging of possible culprit vessels",
+     "expert_label": "not excluded",
+     "expert_evidence": [
+      2
+     ]
+    },
+    {
+     "type": "exclusion",
+     "text": "Source found by echocardiography (TEE not required)",
+     "expert_label": "not excluded",
+     "expert_evidence": [
+      2
+     ]
+    },
+    {
+     "type": "exclusion",
+     "text": "History of atrial fibrillation",
+     "expert_label": "not excluded",
+     "expert_evidence": [
+      4
+     ]
+    },
+    {
+     "type": "exclusion",
+     "text": "Atrial fibrillation on admission ECG",
+     "expert_label": "not excluded",
+     "expert_evidence": [
+      3
+     ]
+    },
+    {
+     "type": "exclusion",
+     "text": "Atrial fibrillation detected by inpatient cardiac telemetry (at least 24 hours required)",
+     "expert_label": "not enough information",
+     "expert_evidence": []
+    },
+    {
+     "type": "exclusion",
+     "text": "Obvious culpable systemic illness such as endocarditis",
+     "expert_label": "not excluded",
+     "expert_evidence": []
+    },
+    {
+     "type": "exclusion",
+     "text": "Patient unable to provide written, informed consent",
+     "expert_label": "not excluded",
+     "expert_evidence": [
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "name": "sigir-201522 \u00d7 NCT02534727",
+   "patient_id": "sigir-201522",
+   "trial_id": "NCT02534727",
+   "trial_title": "Sputum Pharmacokinetics of TB Drugs and Bacterial Drug Resistance",
+   "note": "0. A 65-year-old male with a history of tuberculosis has started to complain of productive cough with tinges of blood.\n1. Chest X-ray reveals a round opaque mass within a cavity in his left upper lobe.\n2. The spherical mass moved in the cavity during supine and prone CT imaging.\n3. Culture of the sputum revealed an organism with septated, low-angle branching hyphae that had straight, parallel walls.\n4. The patient will provide informed consent, and will comply with the trial protocol without any practical issues.",
+   "criteria": [
+    {
+     "type": "inclusion",
+     "text": "At least 18 years of age",
+     "expert_label": "included",
+     "expert_evidence": [
+      0
+     ]
+    },
+    {
+     "type": "inclusion",
+     "text": "Diagnosis of TB (and/or NTM for NIH clinical center subjects)",
+     "expert_label": "included",
+     "expert_evidence": [
+      0
+     ]
+    },
+    {
+     "type": "inclusion",
+     "text": "Ongoing signs and/or symptoms of pulmonary TB (and/or NTM at the NIH CC)",
+     "expert_label": "included",
+     "expert_evidence": [
+      0
+     ]
+    },
+    {
+     "type": "inclusion",
+     "text": "Suspected drug resistance (drug susceptible allowed at the NIH CC)",
+     "expert_label": "not enough information",
+     "expert_evidence": [
+      0
+     ]
+    },
+    {
+     "type": "inclusion",
+     "text": "Available to provide at least 3 sputa over 2 or more days",
+     "expert_label": "not enough information",
+     "expert_evidence": [
+      0
+     ]
+    },
+    {
+     "type": "inclusion",
+     "text": "Taking anti-tuberculosis medicines (or NTM meds at NIH CC) during the time sputa are provided",
+     "expert_label": "not included",
+     "expert_evidence": []
+    },
+    {
+     "type": "inclusion",
+     "text": "Thought likely to be Mycobacterium culture positive (including NTM infected for the NIH CC) by enrolling physician",
+     "expert_label": "not included",
+     "expert_evidence": [
+      3
+     ]
+    },
+    {
+     "type": "inclusion",
+     "text": "GeneXpert MTB/RIF sputum TBpositive (China subjects only)",
+     "expert_label": "not enough information",
+     "expert_evidence": []
+    },
+    {
+     "type": "inclusion",
+     "text": "Likely able to produce sputum samples while on study",
+     "expert_label": "not enough information",
+     "expert_evidence": [
+      0
+     ]
+    },
+    {
+     "type": "inclusion",
+     "text": "Willing to provide blood samples",
+     "expert_label": "included",
+     "expert_evidence": [
+      4
+     ]
+    },
+    {
+     "type": "inclusion",
+     "text": "Willing to have samples stored",
+     "expert_label": "included",
+     "expert_evidence": [
+      4
+     ]
+    },
+    {
+     "type": "exclusion",
+     "text": "Acute liver or kidney disease",
+     "expert_label": "not excluded",
+     "expert_evidence": []
+    },
+    {
+     "type": "exclusion",
+     "text": "Conditions which compromise the subject s ability to take or absorb oral drugs",
+     "expert_label": "not excluded",
+     "expert_evidence": [
+      4
+     ]
+    }
+   ]
+  }
+ ]
+}

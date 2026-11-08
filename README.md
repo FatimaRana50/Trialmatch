@@ -21,10 +21,14 @@ Given a patient note, a criterion type (inclusion/exclusion) and the criterion t
 ```
 data/        split manifest
 src/         data.py (loading, split, prompts, parsing) · metrics.py · infer.py · train.py · evaluate.py
-notebooks/   01 data+split · 02 baseline+fine-tune · 03 final test (run once)
+             manual_decoder.py (hand-written Qwen2 forward + explicit KV cache) · kv_decode.py · bench_kv.py
+             attention.py (reference + tiled online-softmax) · bench_attention.py
+             speculative.py (greedy speculative decoding) · bench_spec.py
+notebooks/   01 data+split · 02 baseline+fine-tune · 02b oversampling experiment · 03 final test (run once)
+             04 KV cache + attention benchmarks · 05 speculative decoding · 06 publish weights + deploy app
 results/     predictions, metrics, plots
 logs/        training logs, configs, frozen environments
-app/         browser application (to come)
+app/         browser application (Gradio): app.py (UI), screening.py (engine), examples.json
 ```
 
 ## Reproduce (Google Colab, free T4)
@@ -40,3 +44,30 @@ python src/train.py --out checkpoints/lora_r16
 python src/evaluate.py --split val --tag lora --adapter checkpoints/lora_r16/final_adapter
 python src/evaluate.py --split test --tag lora --adapter checkpoints/lora_r16/final_adapter --final-test
 ```
+
+## Browser application
+Screen a patient note against a trial's criteria (typed, pasted, or fetched from ClinicalTrials.gov by NCT ID),
+inspect each criterion's label, cited sentence IDs, evidence text and explanation, see the rule-based preliminary
+outcome and missing information, and download an HTML/JSON report with provenance. The *Inference comparison* tab
+runs one criterion live through KV-cache, no-cache, speculative and HF-generate decoding and checks token equality.
+
+**Hosted:** Hugging Face Space (link in the report). **Local:**
+```bash
+pip install -r requirements.txt
+python app/app.py          # then open http://127.0.0.1:7860 (first start downloads ~4 GB of weights)
+```
+The app downloads the LoRA adapters from the Hugging Face Hub. Override with `TRIALMATCH_ADAPTER` /
+`TRIALMATCH_DRAFT_ADAPTER` (local folder or Hub id). Runs on CPU (slow, ~10 s per criterion) or GPU.
+
+## Main results (held-out test split, 206 criteria, greedy decoding)
+| Model | Accuracy | Macro-F1 | Evidence micro-F1 |
+|---|---|---|---|
+| Qwen2.5-1.5B-Instruct zero-shot | 0.180 | 0.164 | 0.221 |
+| + LoRA (r=16) | 0.694 | 0.420 | 0.510 |
+
+KV cache: identical tokens to the uncached path; 5.9x faster at 1024 input / 256 output tokens (T4).
+Tiled attention: max error ~1e-6 (fp32), 59x less memory than the reference at 4096 tokens, slower than fused SDPA.
+Speculative decoding: 240/240 outputs identical to greedy; 93-98% acceptance with the fine-tuned 0.5B draft,
+but 0.8-1.0x speed at batch 1 on a T4 (see report for why).
+
+*Educational screening prototype; not a clinical enrollment decision tool.*

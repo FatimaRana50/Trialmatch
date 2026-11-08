@@ -7,3 +7,4 @@ datasets>=2.20
 numpy
 pandas
 matplotlib
+gradio>=5.0
