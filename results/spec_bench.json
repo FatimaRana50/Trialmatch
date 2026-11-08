@@ -1,0 +1,2200 @@
+{
+  "env": {
+    "target": "Qwen/Qwen2.5-1.5B-Instruct",
+    "target_adapter": "/content/drive/MyDrive/trialmatch/lora_r16/final_adapter",
+    "draft": "Qwen/Qwen2.5-0.5B-Instruct",
+    "draft_adapter": "/content/drive/MyDrive/trialmatch/draft_0.5b/final_adapter",
+    "dtype": "float16",
+    "device": "Tesla T4",
+    "attention": "sdpa (explicit offset causal mask)",
+    "batch": 1,
+    "compatibility": {
+      "same_tokenizer_vocab": true,
+      "vocab_size": 151665,
+      "lm_head_rows_target": 151936,
+      "lm_head_rows_draft": 151936,
+      "target_params_M": 1544,
+      "draft_params_M": 494
+    },
+    "hf_assisted_reference": {
+      "hf_assisted_equals_hf_greedy": 5,
+      "n": 5
+    }
+  },
+  "rows": [
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "method": "greedy (target only)",
+      "draft": null,
+      "k": null,
+      "total_s": 10.88644272700003,
+      "tokens": 271,
+      "tok_s": 24.89334733079327,
+      "speedup": 1.0,
+      "peak_mem_mb": 40.80810546875
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "method": "speculative",
+      "draft": "0.5B base",
+      "k": 1,
+      "total_s": 11.649146530000053,
+      "tokens": 271,
+      "tok_s": 23.263506841646603,
+      "speedup": 0.9345270659068602,
+      "acceptance_rate": 0.924812030075188,
+      "mean_accepted_per_round": 0.924812030075188,
+      "draft_s": 4.5152450450004835,
+      "verify_s": 5.370685156999116,
+      "target_forwards": 153,
+      "greedy_target_forwards": 271,
+      "equal_outputs": 20,
+      "n_prompts": 20,
+      "peak_mem_mb": 46.16357421875
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "method": "speculative",
+      "draft": "0.5B base",
+      "k": 2,
+      "total_s": 13.831520838999722,
+      "tokens": 271,
+      "tok_s": 19.59292858352071,
+      "speedup": 0.7870748888512916,
+      "acceptance_rate": 0.7293577981651376,
+      "mean_accepted_per_round": 1.4587155963302751,
+      "draft_s": 7.518856363999475,
+      "verify_s": 4.547214851000035,
+      "target_forwards": 129,
+      "greedy_target_forwards": 271,
+      "equal_outputs": 20,
+      "n_prompts": 20,
+      "peak_mem_mb": 46.21435546875
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "method": "speculative",
+      "draft": "0.5B base",
+      "k": 4,
+      "total_s": 17.133308736999652,
+      "tokens": 271,
+      "tok_s": 15.817143329400889,
+      "speedup": 0.6353964020674293,
+      "acceptance_rate": 0.6607142857142857,
+      "mean_accepted_per_round": 2.642857142857143,
+      "draft_s": 11.690550645999338,
+      "verify_s": 3.5776975800008586,
+      "target_forwards": 104,
+      "greedy_target_forwards": 271,
+      "equal_outputs": 20,
+      "n_prompts": 20,
+      "peak_mem_mb": 46.29248046875
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "method": "speculative",
+      "draft": "0.5B base",
+      "k": 6,
+      "total_s": 18.811429342999645,
+      "tokens": 271,
+      "tok_s": 14.406135496601594,
+      "speedup": 0.578714276757031,
+      "acceptance_rate": 0.6740196078431373,
+      "mean_accepted_per_round": 4.044117647058823,
+      "draft_s": 13.943050970000058,
+      "verify_s": 2.931237813998905,
+      "target_forwards": 88,
+      "greedy_target_forwards": 271,
+      "equal_outputs": 20,
+      "n_prompts": 20,
+      "peak_mem_mb": 46.37060546875
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "method": "speculative",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "total_s": 11.87186047599971,
+      "tokens": 271,
+      "tok_s": 22.827087679126343,
+      "speedup": 0.9169955079078118,
+      "acceptance_rate": 0.9767441860465116,
+      "mean_accepted_per_round": 0.9767441860465116,
+      "draft_s": 4.490472534000219,
+      "verify_s": 5.386289562001139,
+      "target_forwards": 149,
+      "greedy_target_forwards": 271,
+      "equal_outputs": 20,
+      "n_prompts": 20,
+      "peak_mem_mb": 46.16357421875
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "method": "speculative",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "total_s": 11.831592399000328,
+      "tokens": 271,
+      "tok_s": 22.90477822942052,
+      "speedup": 0.9201164441668769,
+      "acceptance_rate": 0.95,
+      "mean_accepted_per_round": 1.9,
+      "draft_s": 6.117794798000887,
+      "verify_s": 3.740854430999889,
+      "target_forwards": 110,
+      "greedy_target_forwards": 271,
+      "equal_outputs": 20,
+      "n_prompts": 20,
+      "peak_mem_mb": 46.21435546875
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "method": "speculative",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "total_s": 12.982762203000448,
+      "tokens": 271,
+      "tok_s": 20.873832221726218,
+      "speedup": 0.838530549722621,
+      "acceptance_rate": 0.9596774193548387,
+      "mean_accepted_per_round": 3.838709677419355,
+      "draft_s": 8.403468607999457,
+      "verify_s": 2.6432497730006617,
+      "target_forwards": 82,
+      "greedy_target_forwards": 271,
+      "equal_outputs": 20,
+      "n_prompts": 20,
+      "peak_mem_mb": 46.29248046875
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "method": "speculative",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "total_s": 13.4053259599998,
+      "tokens": 271,
+      "tok_s": 20.215845613052444,
+      "speedup": 0.812098322672953,
+      "acceptance_rate": 0.9311594202898551,
+      "mean_accepted_per_round": 5.586956521739131,
+      "draft_s": 9.567256963999853,
+      "verify_s": 1.9465925419995074,
+      "target_forwards": 66,
+      "greedy_target_forwards": 271,
+      "equal_outputs": 20,
+      "n_prompts": 20,
+      "peak_mem_mb": 46.37060546875
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "method": "greedy (target only)",
+      "draft": null,
+      "k": null,
+      "total_s": 97.00075577000075,
+      "tokens": 2360,
+      "tok_s": 24.329707343681058,
+      "speedup": 1.0,
+      "peak_mem_mb": 24.6640625
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "method": "speculative",
+      "draft": "0.5B base",
+      "k": 1,
+      "total_s": 94.85456468799975,
+      "tokens": 2360,
+      "tok_s": 24.88019430338041,
+      "speedup": 1.0226261233611724,
+      "acceptance_rate": 0.9180327868852459,
+      "mean_accepted_per_round": 0.9180327868852459,
+      "draft_s": 42.47302488499531,
+      "verify_s": 50.77572167300491,
+      "target_forwards": 1240,
+      "greedy_target_forwards": 2360,
+      "equal_outputs": 20,
+      "n_prompts": 20,
+      "peak_mem_mb": 28.75390625
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "method": "speculative",
+      "draft": "0.5B base",
+      "k": 2,
+      "total_s": 94.85063222200006,
+      "tokens": 2360,
+      "tok_s": 24.88122582542588,
+      "speedup": 1.0226685209959199,
+      "acceptance_rate": 0.9166666666666666,
+      "mean_accepted_per_round": 1.8333333333333333,
+      "draft_s": 58.188776411992876,
+      "verify_s": 34.9678371460011,
+      "target_forwards": 860,
+      "greedy_target_forwards": 2360,
+      "equal_outputs": 20,
+      "n_prompts": 20,
+      "peak_mem_mb": 28.8046875
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "method": "speculative",
+      "draft": "0.5B base",
+      "k": 4,
+      "total_s": 97.77447883400009,
+      "tokens": 2360,
+      "tok_s": 24.137178005384914,
+      "speedup": 0.9920866562192272,
+      "acceptance_rate": 0.8703703703703703,
+      "mean_accepted_per_round": 3.4814814814814814,
+      "draft_s": 73.93458229200064,
+      "verify_s": 22.24149559199782,
+      "target_forwards": 560,
+      "greedy_target_forwards": 2360,
+      "equal_outputs": 20,
+      "n_prompts": 20,
+      "peak_mem_mb": 28.8828125
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "method": "speculative",
+      "draft": "0.5B base",
+      "k": 6,
+      "total_s": 110.49577856700012,
+      "tokens": 2360,
+      "tok_s": 21.35828201408611,
+      "speedup": 0.8778684310657485,
+      "acceptance_rate": 0.7575757575757576,
+      "mean_accepted_per_round": 4.545454545454546,
+      "draft_s": 90.35816182100007,
+      "verify_s": 18.491042905001677,
+      "target_forwards": 460,
+      "greedy_target_forwards": 2360,
+      "equal_outputs": 20,
+      "n_prompts": 20,
+      "peak_mem_mb": 28.9609375
+    }
+  ],
+  "equal": 240,
+  "total": 240,
+  "checks": [
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 0,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 1,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 2,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 3,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 4,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 5,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 6,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 7,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 8,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 9,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 10,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 11,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 12,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 13,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 14,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 15,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 16,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 17,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 18,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 19,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 0,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 1,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 2,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 3,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 4,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 5,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 6,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 7,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 8,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 9,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 10,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 11,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 12,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 13,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 14,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 15,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 16,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 17,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 18,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 19,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 0,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 1,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 2,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 3,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 4,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 5,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 6,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 7,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 8,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 9,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 10,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 11,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 12,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 13,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 14,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 15,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 16,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 17,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 18,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 19,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 0,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 1,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 2,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 3,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 4,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 5,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 6,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 7,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 8,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 9,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 10,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 11,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 12,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 13,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 14,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 15,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 16,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 17,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 18,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 19,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 0,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 1,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 2,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 3,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 4,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 5,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 6,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 7,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 8,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 9,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 10,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 11,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 12,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 13,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 14,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 15,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 16,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 17,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 18,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 1,
+      "prompt": 19,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 0,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 1,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 2,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 3,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 4,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 5,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 6,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 7,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 8,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 9,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 10,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 11,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 12,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 13,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 14,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 15,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 16,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 17,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 18,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 2,
+      "prompt": 19,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 0,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 1,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 2,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 3,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 4,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 5,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 6,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 7,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 8,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 9,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 10,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 11,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 12,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 13,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 14,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 15,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 16,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 17,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 18,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 4,
+      "prompt": 19,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 0,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 1,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 2,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 3,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 4,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 5,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 6,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 7,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 8,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 9,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 10,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 11,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 12,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 13,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 14,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 15,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 16,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 17,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 18,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "A: screening JSON (fine-tuned 1.5B target)",
+      "draft": "0.5B fine-tuned",
+      "k": 6,
+      "prompt": 19,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 0,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 1,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 2,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 3,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 4,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 5,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 6,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 7,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 8,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 9,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 10,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 11,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 12,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 13,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 14,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 15,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 16,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 17,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 18,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 1,
+      "prompt": 19,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 0,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 1,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 2,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 3,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 4,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 5,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 6,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 7,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 8,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 9,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 10,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 11,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 12,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 13,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 14,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 15,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 16,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 17,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 18,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 2,
+      "prompt": 19,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 0,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 1,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 2,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 3,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 4,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 5,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 6,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 7,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 8,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 9,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 10,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 11,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 12,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 13,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 14,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 15,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 16,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 17,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 18,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 4,
+      "prompt": 19,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 0,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 1,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 2,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 3,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 4,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 5,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 6,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 7,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 8,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 9,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 10,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 11,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 12,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 13,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 14,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 15,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 16,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 17,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 18,
+      "equal": true,
+      "first_mismatch": null
+    },
+    {
+      "setting": "B: free-text summary (base 1.5B target)",
+      "draft": "0.5B base",
+      "k": 6,
+      "prompt": 19,
+      "equal": true,
+      "first_mismatch": null
+    }
+  ]
+}
