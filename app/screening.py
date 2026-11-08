@@ -23,9 +23,9 @@ from manual_decoder import ManualQwen2
 from speculative import speculative_greedy
 
 TARGET_BASE = os.environ.get("TRIALMATCH_BASE", infer.BASE_MODEL)
-TARGET_ADAPTER = os.environ.get("TRIALMATCH_ADAPTER", "FatimaRana50/trialmatch-qwen2.5-1.5b-lora")
+TARGET_ADAPTER = os.environ.get("TRIALMATCH_ADAPTER", "f777777777/trialmatch-qwen2.5-1.5b-lora")
 DRAFT_BASE = os.environ.get("TRIALMATCH_DRAFT", "Qwen/Qwen2.5-0.5B-Instruct")
-DRAFT_ADAPTER = os.environ.get("TRIALMATCH_DRAFT_ADAPTER", "FatimaRana50/trialmatch-qwen2.5-0.5b-draft-lora")
+DRAFT_ADAPTER = os.environ.get("TRIALMATCH_DRAFT_ADAPTER", "f777777777/trialmatch-qwen2.5-0.5b-draft-lora")
 
 MODES = {
     "KV cache (manual decoder)": "kv_cache",
