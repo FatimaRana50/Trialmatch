@@ -14,7 +14,7 @@ Given a patient note, a criterion type (inclusion/exclusion) and the criterion t
 - Dataset: [`ncbi/TrialGPT-Criterion-Annotations`](https://huggingface.co/datasets/ncbi/TrialGPT-Criterion-Annotations) (1015 annotations, 53 patients, 103 trials).
 - Columns used: see `KEEP_COLUMNS` in `src/data.py`. All `gpt4_*` columns, `explanation_correctness` and `training` are dropped.
 - Split: sorted patient IDs → `np.random.default_rng(42).shuffle` → 37 train / 8 val / 8 test patients
-  (603 / 206 / 206 annotations). Manifest: [`data/split_manifest.json`](data/split_manifest.json).
+  (602 / 206 / 206 annotations; annotation 883 dropped for empty criterion text). Manifest: [`data/split_manifest.json`](data/split_manifest.json).
   Every script re-derives the split and asserts it equals the manifest.
 
 ## Layout
