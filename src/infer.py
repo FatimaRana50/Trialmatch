@@ -10,8 +10,8 @@ MAX_NEW_TOKENS = 64
 
 def load_model(base=BASE_MODEL, adapter=None, dtype=torch.float16, device=None):
     device = device or ("cuda" if torch.cuda.is_available() else "cpu")
-    if device == "cpu":
-        dtype = torch.float32
+    if device == "cpu" and dtype == torch.float16:
+        dtype = torch.float32  # fp16 matmuls are very slow on CPU; bf16/fp32 are the CPU options
     tok = AutoTokenizer.from_pretrained(base)
     tok.padding_side = "left"  # left-pad so every prompt ends right before generation
     model = AutoModelForCausalLM.from_pretrained(base, dtype=dtype, attn_implementation="sdpa")

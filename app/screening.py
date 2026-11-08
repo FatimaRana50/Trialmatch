@@ -47,6 +47,22 @@ class InputError(ValueError):
 
 # ------------------------------------------------------------------ models (lazy, shared)
 
+def cpu_dtype(n_params_b, extra_gb=1.5):
+    """fp32 on CPU when there is room (bf16 matmuls are slow without AVX512-BF16), else bf16 at half
+    the memory. TRIALMATCH_DTYPE=float32|bfloat16 overrides."""
+    forced = os.environ.get("TRIALMATCH_DTYPE")
+    if forced:
+        return getattr(torch, forced)
+    import psutil
+    avail_gb = psutil.virtual_memory().available / 1e9
+    return torch.float32 if avail_gb > n_params_b * 4 + extra_gb else torch.bfloat16
+
+
+def free_gb():
+    import psutil
+    return psutil.virtual_memory().available / 1e9
+
+
 class Models:
     def __init__(self):
         self.lock = threading.Lock()
@@ -61,8 +77,11 @@ class Models:
             if self.target is None:
                 self.status = (f"Loading {TARGET_BASE} + fine-tuned adapter... "
                                "(the first start downloads about 3 GB; this can take several minutes)")
+                dtype = torch.float16 if torch.cuda.is_available() else cpu_dtype(1.55)
+                if dtype == torch.bfloat16:
+                    self.status += f" Low free memory ({free_gb():.1f} GB): using bfloat16 (slower on CPU)."
                 try:
-                    self.tok, self.target_hf = infer.load_model(TARGET_BASE, TARGET_ADAPTER or None)
+                    self.tok, self.target_hf = infer.load_model(TARGET_BASE, TARGET_ADAPTER or None, dtype=dtype)
                 except Exception as e:
                     self.status = f"Model failed to load: {type(e).__name__}: {e}"
                     raise
@@ -71,6 +90,9 @@ class Models:
                 where = torch.cuda.get_device_name(0) if dev.type == "cuda" else "CPU"
                 self.status = (f"Ready: {TARGET_BASE.split('/')[-1]} + LoRA on {where} "
                                f"({str(self.target.dtype).replace('torch.', '')})")
+                if self.target.dtype == torch.bfloat16 and dev.type == "cpu":
+                    self.status += (" · low-memory mode: close other programs and restart the app for "
+                                    "faster float32 inference")
                 self.ready = True
         return self.tok, self.target_hf, self.target
 
@@ -78,11 +100,15 @@ class Models:
         self.load_target()
         with self.lock:
             if self.draft is None:
+                dtype = self.target.dtype
+                if self.target_hf.device.type == "cpu" and free_gb() < 0.5 * (4 if dtype == torch.float32 else 2) + 0.8:
+                    raise InputError(f"Not enough free memory ({free_gb():.1f} GB) to also load the 0.5B draft model "
+                                     "for speculative decoding. Close other programs or use another mode.")
                 try:
-                    tok_d, self.draft_hf = infer.load_model(DRAFT_BASE, DRAFT_ADAPTER or None)
+                    tok_d, self.draft_hf = infer.load_model(DRAFT_BASE, DRAFT_ADAPTER or None, dtype=dtype)
                     self.draft_name = f"{DRAFT_BASE} + {DRAFT_ADAPTER}" if DRAFT_ADAPTER else DRAFT_BASE
                 except Exception:                     # fine-tuned draft unavailable -> base draft
-                    tok_d, self.draft_hf = infer.load_model(DRAFT_BASE)
+                    tok_d, self.draft_hf = infer.load_model(DRAFT_BASE, dtype=dtype)
                     self.draft_name = DRAFT_BASE
                 assert tok_d.get_vocab() == self.tok.get_vocab(), "draft tokenizer differs from target"
                 self.draft = ManualQwen2(self.draft_hf)
