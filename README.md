@@ -51,11 +51,16 @@ inspect each criterion's label, cited sentence IDs, evidence text and explanatio
 outcome and missing information, and download an HTML/JSON report with provenance. The *Inference comparison* tab
 runs one criterion live through KV-cache, no-cache, speculative and HF-generate decoding and checks token equality.
 
-**Hosted:** Hugging Face Space (link in the report). **Local:**
+**Start it (one step):**
 ```bash
-pip install -r requirements.txt
-python app/app.py          # then open http://127.0.0.1:7860 (first start downloads ~4 GB of weights)
+./run_app.sh               # Linux/macOS  (Windows: double-click run_app.bat)
 ```
+The first run creates `.venv`, installs CPU dependencies and downloads ~4 GB of weights; the app then opens at
+http://127.0.0.1:7860. Requirements: Python 3.10+, ~8 GB free RAM, ~6 GB disk. Manual alternative:
+`pip install -r requirements.txt && python app/app.py`.
+
+Weights (LoRA adapters, public): [target 1.5B](https://huggingface.co/f777777777/trialmatch-qwen2.5-1.5b-lora) ·
+[draft 0.5B](https://huggingface.co/f777777777/trialmatch-qwen2.5-0.5b-draft-lora).
 The app downloads the LoRA adapters from the Hugging Face Hub. Override with `TRIALMATCH_ADAPTER` /
 `TRIALMATCH_DRAFT_ADAPTER` (local folder or Hub id). Runs on CPU (slow, ~10 s per criterion) or GPU.
 

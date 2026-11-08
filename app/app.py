@@ -300,4 +300,5 @@ with gr.Blocks(title="TrialMatch screening prototype", **({} if _GR6 else _STYLE
 if __name__ == "__main__":
     demo.queue(default_concurrency_limit=1).launch(
         server_name=os.environ.get("HOST", "0.0.0.0"), server_port=int(os.environ.get("PORT", 7860)),
-        share=os.environ.get("TRIALMATCH_SHARE") == "1", allowed_paths=[REPORT_DIR], **(_STYLE if _GR6 else {}))
+        share=os.environ.get("TRIALMATCH_SHARE") == "1", allowed_paths=[REPORT_DIR], inbrowser=os.environ.get("TRIALMATCH_INBROWSER") == "1",
+        **(_STYLE if _GR6 else {}))
