@@ -45,6 +45,9 @@ python src/evaluate.py --split val --tag lora --adapter checkpoints/lora_r16/fin
 python src/evaluate.py --split test --tag lora --adapter checkpoints/lora_r16/final_adapter --final-test
 ```
 
+## Demo video
+[5-7 minute application demonstration (YouTube)](https://youtu.be/EhLhlF_ktfA)
+
 ## Browser application
 Screen a patient note against a trial's criteria (typed, pasted, or fetched from ClinicalTrials.gov by NCT ID),
 inspect each criterion's label, cited sentence IDs, evidence text and explanation, see the rule-based preliminary
