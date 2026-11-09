@@ -112,30 +112,29 @@ Fig.~\ref{fig:arch} shows the pipeline used by both evaluation and the applicati
 
 \begin{figure*}[t]
 \centering
-\resizebox{\textwidth}{!}{%
-\begin{tikzpicture}[font=\footnotesize, node distance=4mm and 5mm,
-  box/.style={draw, rounded corners=2pt, fill=blue!6, align=center, minimum height=9mm, inner sep=3pt},
-  model/.style={draw, rounded corners=2pt, fill=orange!12, align=center, minimum height=9mm, inner sep=3pt},
-  out/.style={draw, rounded corners=2pt, fill=green!8, align=center, minimum height=9mm, inner sep=3pt},
+\begin{tikzpicture}[font=\footnotesize,
+  box/.style={draw, rounded corners=2pt, fill=blue!6, align=center, text width=2.6cm, minimum height=9mm, inner sep=2pt},
+  model/.style={draw, rounded corners=2pt, fill=orange!12, align=center, text width=3.3cm, minimum height=9mm, inner sep=2pt},
+  out/.style={draw, rounded corners=2pt, fill=green!8, align=center, text width=2.8cm, minimum height=9mm, inner sep=2pt},
   arr/.style={-{Stealth[length=2mm]}, thick}]
-\node[box] (note) {Patient note\\(free text or ``0.\,\dots'')};
-\node[box, below=of note] (crit) {Criteria text or\\ClinicalTrials.gov ID};
-\node[box, right=8mm of note] (split) {Sentence splitter\\IDs 0..n};
-\node[box, right=8mm of crit] (parse) {Criterion parser\\type + text};
-\node[box, right=8mm of $(split)!0.5!(parse)$] (prompt) {Prompt builder\\chat template,\\allowed labels};
-\node[model, right=8mm of prompt] (dec) {Qwen2.5-1.5B + LoRA\\hand-written decoder\\KV cache $\cdot$ RoPE $\cdot$ GQA};
-\node[model, above=of dec] (draft) {0.5B draft (speculative)};
-\node[model, below=of dec] (attn) {attention: SDPA / reference / tiled};
-\node[out, right=8mm of dec] (json) {JSON \{evidence, label\}\\parser + ID check};
-\node[out, right=8mm of json, yshift=7mm] (expl) {Evidence text +\\template explanation};
-\node[out, right=8mm of json, yshift=-7mm] (agg) {Rule-based\\overall outcome};
-\node[out, below=of agg] (rep) {HTML/JSON report\\with provenance};
+\node[box]   (note)   at (0,0.75)   {Patient note (free text or numbered)};
+\node[box]   (crit)   at (0,-0.75)  {Criteria text or ClinicalTrials.gov ID};
+\node[box]   (split)  at (3.3,0.75) {Sentence splitter (IDs 0..n)};
+\node[box]   (parse)  at (3.3,-0.75){Criterion parser (type + text)};
+\node[box]   (prompt) at (6.6,0)    {Prompt builder: chat template, allowed labels};
+\node[model] (dec)    at (10.3,0)   {Qwen2.5-1.5B + LoRA, hand-written decoder (KV cache, RoPE, GQA)};
+\node[model] (draft)  at (10.3,1.65){0.5B draft (speculative)};
+\node[model] (attn)   at (10.3,-1.65){Attention: SDPA / reference / tiled};
+\node[out]   (json)   at (14.2,0)   {JSON \{evidence, label\}: parser + ID check};
+\node[out]   (expl)   at (14.2,1.65){Evidence text + template explanation};
+\node[out]   (agg)    at (14.2,-1.65){Rule-based overall outcome};
+\node[out]   (rep)    at (14.2,-3.05){HTML / JSON report with provenance};
 \draw[arr] (note) -- (split); \draw[arr] (crit) -- (parse);
 \draw[arr] (split) -- (prompt); \draw[arr] (parse) -- (prompt);
-\draw[arr] (prompt) -- (dec); \draw[arr] (draft) -- node[right]{\scriptsize propose $k$} (dec);
+\draw[arr] (prompt) -- (dec); \draw[arr] (draft) -- node[right, font=\scriptsize]{propose $k$} (dec);
 \draw[arr] (attn) -- (dec); \draw[arr] (dec) -- (json);
 \draw[arr] (json) -- (expl); \draw[arr] (json) -- (agg); \draw[arr] (agg) -- (rep);
-\end{tikzpicture}}
+\end{tikzpicture}
 \caption{TrialMatch pipeline. The same prompt builder, decoder and parser are used for offline evaluation and in the browser application. Orange: Transformer components implemented in this work.}
 \label{fig:arch}
 \end{figure*}
@@ -418,7 +417,7 @@ Table~\ref{tab:kv} and Fig.~\ref{fig:kv} show the expected scaling. Prefill cost
 
 \begin{table*}[t]
 \centering
-\caption{KV cache vs.\ no cache (NC) on a T4 (fp16, batch 1, median of 3 after warm-up). HF = Hugging Face \texttt{generate}. Memory is peak above the loaded model.}
+\caption{KV cache vs.\ no cache (NC) on a T4 (fp16, batch 1, median of 3 after warm-up). HF = Hugging Face generate(). Memory is peak above the loaded model.}
 \label{tab:kv}
 \begin{tabular}{rrccccc}
 \toprule
@@ -504,7 +503,7 @@ Table~\ref{tab:alternatives} summarises the alternatives we considered and the e
 \caption{Design alternatives and evidence for the final choice.}
 \label{tab:alternatives}
 \footnotesize
-\begin{tabular}{p{1.25cm}p{2.1cm}p{4.0cm}}
+\begin{tabular}{p{1.55cm}p{1.95cm}p{3.75cm}}
 \toprule
 Decision & Alternatives & Choice and evidence \\
 \midrule
