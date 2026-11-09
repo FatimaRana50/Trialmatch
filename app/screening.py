@@ -101,9 +101,15 @@ class Models:
         with self.lock:
             if self.draft is None:
                 dtype = self.target.dtype
-                if self.target_hf.device.type == "cpu" and free_gb() < 0.5 * (4 if dtype == torch.float32 else 2) + 0.8:
-                    raise InputError(f"Not enough free memory ({free_gb():.1f} GB) to also load the 0.5B draft model "
-                                     "for speculative decoding. Close other programs or use another mode.")
+                if self.target_hf.device.type == "cpu":
+                    # the draft only proposes tokens and the target verifies every one, so a bf16 draft
+                    # (~1 GB instead of ~2 GB) keeps the output identical; it can only change acceptance
+                    if dtype == torch.float32 and free_gb() < 0.5 * 4 + 0.8:
+                        dtype = torch.bfloat16
+                    if free_gb() < 0.5 * 2 + 0.5:
+                        raise InputError(f"Not enough free memory ({free_gb():.1f} GB) to also load the 0.5B draft "
+                                         "model for speculative decoding. Close other programs (e.g. Chrome) or "
+                                         "use another mode.")
                 try:
                     tok_d, self.draft_hf = infer.load_model(DRAFT_BASE, DRAFT_ADAPTER or None, dtype=dtype)
                     self.draft_name = f"{DRAFT_BASE} + {DRAFT_ADAPTER}" if DRAFT_ADAPTER else DRAFT_BASE
