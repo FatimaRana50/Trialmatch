@@ -22,7 +22,7 @@ def load_model(base=BASE_MODEL, adapter=None, dtype=torch.float16, device=None):
 
 
 def greedy_config(tok, max_new_tokens=MAX_NEW_TOKENS):
-    # Qwen's shipped generation_config samples (temperature 0.7, repetition_penalty 1.05).
+    # Qwen's shipped generation_config samples (temperature 0.7, top_p 0.8, top_k 20, repetition_penalty 1.1).
     # Replace it fully so decoding is deterministic greedy.
     return GenerationConfig(
         do_sample=False, num_beams=1, max_new_tokens=max_new_tokens, repetition_penalty=1.0,

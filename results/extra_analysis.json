@@ -1,0 +1,161 @@
+{
+ "train": {
+  "patients": 37,
+  "trials": 72,
+  "n": 602,
+  "incl": 215,
+  "excl": 387,
+  "labels": {
+   "included": 88,
+   "not included": 13,
+   "excluded": 8,
+   "not excluded": 291,
+   "not enough information": 174,
+   "not applicable": 28
+  },
+  "empty": 348,
+  "tok_mean": 355,
+  "tok_max": 636
+ },
+ "val": {
+  "patients": 8,
+  "trials": 16,
+  "n": 206,
+  "incl": 66,
+  "excl": 140,
+  "labels": {
+   "included": 35,
+   "not included": 3,
+   "excluded": 2,
+   "not excluded": 101,
+   "not enough information": 53,
+   "not applicable": 12
+  },
+  "empty": 116,
+  "tok_mean": 368,
+  "tok_max": 476
+ },
+ "test": {
+  "patients": 8,
+  "trials": 16,
+  "n": 206,
+  "incl": 75,
+  "excl": 131,
+  "labels": {
+   "included": 27,
+   "not included": 7,
+   "excluded": 0,
+   "not excluded": 91,
+   "not enough information": 66,
+   "not applicable": 15
+  },
+  "empty": 145,
+  "tok_mean": 338,
+  "tok_max": 540
+ },
+ "leak": {
+  "notes": [
+   0,
+   0,
+   0
+  ],
+  "pairs": [
+   0,
+   0,
+   0
+  ]
+ },
+ "val_boot": {
+  "fixed": 128,
+  "broken": 29,
+  "acc_gain": 0.475,
+  "acc_gain_ci": [
+   0.313,
+   0.618
+  ],
+  "mf1_gain": 0.162,
+  "mf1_gain_ci": [
+   0.049,
+   0.257
+  ],
+  "lora_acc_ci": [
+   0.618,
+   0.758
+  ]
+ },
+ "val_tax": {
+  "base": {
+   "applicability": 128,
+   "polarity": 10,
+   "decision_without_info": 24
+  },
+  "lora": {
+   "missed_info": 23,
+   "decision_without_info": 26,
+   "applicability": 12,
+   "polarity": 2
+  }
+ },
+ "val_unsupported": {
+  "base": [
+   0,
+   68,
+   0
+  ],
+  "lora": [
+   113,
+   155,
+   82
+  ]
+ },
+ "val_expert_unsup": [
+  72,
+  141
+ ],
+ "test_boot": {
+  "fixed": 129,
+  "broken": 23,
+  "acc_gain": 0.518,
+  "acc_gain_ci": [
+   0.364,
+   0.64
+  ],
+  "mf1_gain": 0.262,
+  "mf1_gain_ci": [
+   0.157,
+   0.355
+  ],
+  "lora_acc_ci": [
+   0.546,
+   0.814
+  ]
+ },
+ "test_tax": {
+  "base": {
+   "polarity": 8,
+   "applicability": 145,
+   "decision_without_info": 16
+  },
+  "lora": {
+   "missed_info": 20,
+   "applicability": 15,
+   "decision_without_info": 28
+  }
+ },
+ "test_unsupported": {
+  "base": [
+   0,
+   48,
+   0
+  ],
+  "lora": [
+   123,
+   145,
+   84
+  ]
+ },
+ "test_expert_unsup": [
+  84,
+  125
+ ]
+}

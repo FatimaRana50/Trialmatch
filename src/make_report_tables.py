@@ -147,5 +147,46 @@ def spec():
           "equal", data["equal"], "/", data["total"])
 
 
+def confusion_base():
+    c = load("results/base_test_metrics.json")["overall"]["classification"]["confusion"]
+    cols = c["cols_pred"]
+    head = "Gold $\\downarrow$ / Pred $\\rightarrow$ & " + " & ".join(SHORT.get(x, x) for x in cols) + " \\\\"
+    body = [f"{SHORT.get(g, g)} & " + " & ".join(str(v) for v in row) + " \\\\" for g, row in zip(c["rows_gold"], c["matrix"])]
+    write("cm_base_overall.tex", f"\\begin{{tabular}}{{l{'r' * len(cols)}}}\n\\toprule\n{head}\n\\midrule\n" + "\n".join(body) +
+          "\n\\bottomrule\n\\end{tabular}\n")
+
+
+def split_stats():
+    """results/extra_analysis.json is written by src/extra_analysis.py."""
+    x = load("results/extra_analysis.json")
+    sp = ("train", "val", "test")
+    rows = [f"Patients / trials & " + " & ".join(f"{x[s]['patients']} / {x[s]['trials']}" for s in sp) + " \\\\",
+            f"Annotations (incl. / excl.) & " + " & ".join(f"{x[s]['n']} ({x[s]['incl']} / {x[s]['excl']})" for s in sp) + " \\\\",
+            "\\midrule"]
+    for lab in ("included", "not included", "excluded", "not excluded", "not enough information", "not applicable"):
+        rows.append(f"{lab} & " + " & ".join(str(x[s]["labels"][lab]) for s in sp) + " \\\\")
+    rows += ["\\midrule",
+             "No gold evidence & " + " & ".join(str(x[s]["empty"]) for s in sp) + " \\\\",
+             "Prompt tokens (mean / max) & " + " & ".join(f"{x[s]['tok_mean']} / {x[s]['tok_max']}" for s in sp) + " \\\\"]
+    write("split_stats.tex", "\n".join(rows) + "\n")
+
+
+def taxonomy():
+    x = load("results/extra_analysis.json")
+    names = [("polarity", "Polarity (decisive $\\rightarrow$ opposite decisive)"),
+             ("decision_without_info", "Decision without information (NEI $\\rightarrow$ decisive)"),
+             ("applicability", "Applicability (N/A involved)"),
+             ("missed_info", "Missed information (decisive $\\rightarrow$ NEI)")]
+    rows = []
+    for key, name in names:
+        rows.append(f"{name} & {x['val_tax']['base'].get(key, 0)} & {x['val_tax']['lora'].get(key, 0)} & "
+                    f"{x['test_tax']['base'].get(key, 0)} & {x['test_tax']['lora'].get(key, 0)} \\\\")
+    tot = lambda d: sum(d.values())
+    rows += ["\\midrule", f"Total wrong labels & {tot(x['val_tax']['base'])} & {tot(x['val_tax']['lora'])} & "
+             f"{tot(x['test_tax']['base'])} & {tot(x['test_tax']['lora'])} \\\\"]
+    write("taxonomy.tex", "\n".join(rows) + "\n")
+
+
 if __name__ == "__main__":
     main_results(); per_class(); confusion("inclusion"); confusion("exclusion"); evidence(); design(); kv(); attention(); spec()
+    confusion_base(); split_stats(); taxonomy()
